@@ -49,7 +49,7 @@ defineProps({
   },
   subtitle: { 
     type: String, 
-    default: 'Est. 2024 Collection' 
+    default: 'Est. 2026 Collection' 
   },
   title: { 
     type: String, 

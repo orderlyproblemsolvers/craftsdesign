@@ -9,7 +9,6 @@ export default defineNuxtConfig({
       title: 'Crafts Design | Garden Statues',
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'theme-color', content: '#ffffff' } // Adjust to your primary brand color
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },

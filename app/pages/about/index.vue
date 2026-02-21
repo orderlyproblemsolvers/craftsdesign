@@ -15,39 +15,7 @@
       </p>
     </section>
 
-    <section class="max-w-360 mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-32">
-      <div class="relative aspect-square rounded-[3rem] overflow-hidden shadow-2xl">
-        <img src="/img/cd-lion.jpg" alt="Artisan at work" class="w-full h-full object-cover" />
-        <div class="absolute inset-0 bg-linear-to-t from-black/40 to-transparent"></div>
-      </div>
-      
-      <div class="space-y-8">
-        <h3 class="text-4xl font-serif text-primary dark:text-white">Philosophy of Form</h3>
-        <p class="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
-          At Crafts Design, we believe a sculpture is more than just a decoration; it’s a silent guardian of your landscape. Every piece—whether cast in bronze, carved from stone, or sculpted in resin—is designed to withstand the test of time and the elements.
-        </p>
-        <div class="space-y-4">
-          <div class="flex items-start gap-4">
-            <div class="size-10 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
-              <UIcon name="i-lucide-award" class="w-5 h-5 text-accent" />
-            </div>
-            <div>
-              <h4 class="font-bold text-primary dark:text-white">Unrivaled Detail</h4>
-              <p class="text-sm text-gray-500">Each piece undergoes a rigorous finishing process to ensure lifelike texture.</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-4">
-            <div class="size-10 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
-              <UIcon name="i-lucide-shield-check" class="w-5 h-5 text-accent" />
-            </div>
-            <div>
-              <h4 class="font-bold text-primary dark:text-white">Heirloom Quality</h4>
-              <p class="text-sm text-gray-500">Using weatherproof materials that age gracefully alongside your garden.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+
 
     <section class="max-w-360 mx-auto px-6 lg:px-12">
       <div class="bg-gray-50 dark:bg-white/5 rounded-[3rem] p-8 md:p-16 border border-gray-100 dark:border-white/10">

@@ -17,7 +17,7 @@
 
     <section class="max-w-360 mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-32">
       <div class="relative aspect-square rounded-[3rem] overflow-hidden shadow-2xl">
-        <img src="/img/cd-deer.jpg" alt="Artisan at work" class="w-full h-full object-cover" />
+        <img src="/img/cd-lion.jpg" alt="Artisan at work" class="w-full h-full object-cover" />
         <div class="absolute inset-0 bg-linear-to-t from-black/40 to-transparent"></div>
       </div>
       

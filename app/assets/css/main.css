@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@import "@nuxt/ui";
+
+
+@theme {
+    --color-base: #f6f8f6;
+    --color-primary: #1a3c26;
+    --color-accent: #11d442;
+    --color-secondary: #c0775a;
+    --color-basic: #000000;
+}
+
+
+html {
+    background: var(--color-base);
+}

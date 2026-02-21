@@ -48,11 +48,11 @@ export default defineNuxtConfig({
     }
   },
 
-  colorMode: {
-    preference: 'light',
-    fallback: 'light',
-    classSuffix: ''
-  },
+  // colorMode: {
+  //   preference: 'light',
+  //   fallback: 'light',
+  //   classSuffix: ''
+  // },
 
   supabase: {
     redirectOptions: {

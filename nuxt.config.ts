@@ -72,7 +72,7 @@ export default defineNuxtConfig({
 
   site: {
     // In development, use your localhost. In production, use your actual domain.
-    url: process.env.NODE_ENV === 'production' ? 'https://craftsdesign.com' : 'http://localhost:3000',
+    url: process.env.NODE_ENV === 'production' ? 'https://craftsdesign.ng' : 'http://localhost:3000',
     name: 'Crafts Design',
   },
   sitemap: {

@@ -33,7 +33,7 @@ useSchemaOrg([
     },
     image: '/img/cd-lion.jpg',
     telephone: '+2348136658893',
-    url: 'https://craftsdesign.com.ng', // Replace with your actual domain
+    url: 'https://craftsdesign.ng', // Replace with your actual domain
   })
 ])
 

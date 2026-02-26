@@ -69,19 +69,24 @@ export default defineNuxtConfig({
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000'
     }
   },
+  routeRules: {
+    
+    // Block an entire directory and all its sub-pages
+    '/admin/**': { headers: { 'X-Robots-Tag': 'noindex, nofollow' } }
+  },
 
   site: {
     // In development, use your localhost. In production, use your actual domain.
-    url: process.env.NODE_ENV === 'production' ? 'https://craftsdesign.ng' : 'http://localhost:3000',
+    url: 'https://craftsdesign.ng',
     name: 'Crafts Design',
   },
   sitemap: {
-    // Automatically include all static pages (/, /collections, /about)
-    autoLastmod: true,
-    
-    // Dynamic Routes for your Sculptures
     sources: [
-      '/api/sitemap-urls'
+      '/api/__sitemap__/urls'
+    ],
+    // Optional: Exclude certain pages from the sitemap
+    exclude: [
+      '/admin/**',
     ]
   },
 

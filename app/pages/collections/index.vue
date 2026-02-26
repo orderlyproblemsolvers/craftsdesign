@@ -50,7 +50,9 @@
             :product="{
               ...product,
               image: product.image_url,
-              price: formatPrice(product.price)
+              price: formatPrice(product.price),
+              // We encode the name here so the URL is instantly ready for the NuxtLink
+              encodedUrl: `/collections/${encodeURIComponent(product.name)}`
             }" 
           />
         </transition-group>
@@ -67,17 +69,29 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+
+// --- 1. SEO Setup ---
+const pageTitle = 'The Master Collection | Crafts Design'
+const pageDescription = 'Explore our complete menagerie of hand-crafted estate sculptures, interactive garden art, and architectural centerpieces.'
+
+useSeoMeta({
+  title: pageTitle,
+  ogTitle: pageTitle,
+  description: pageDescription,
+  ogDescription: pageDescription,
+})
+
 defineOgImageComponent('CraftsRadial', {
   title: 'The Master Collection',
   description: 'Explore our complete menagerie of garden estate sculptures.'
 })
 
+// --- 2. Data Fetching & State ---
 const supabase = useSupabaseClient()
 const activeCategory = ref('All')
 const categories = ['All', 'Bronze & Metal', 'Stone & Concrete', 'Aquatic', 'Mega-Fauna', 'Interactive', 'Fibre-Glass']
 
 // SERVER-SIDE FETCH
-// useAsyncData runs on the server for the initial request
 const { data: allProducts, pending } = await useAsyncData('products', async () => {
   const { data, error } = await supabase
     .from('products')
@@ -88,7 +102,7 @@ const { data: allProducts, pending } = await useAsyncData('products', async () =
   return data
 })
 
-// Helper to format price for display
+// --- 3. Helper Functions & Computed Logic ---
 const formatPrice = (price: number | null) => {
   if (price === null || price === undefined) return 'Price on Request'
   return new Intl.NumberFormat('en-NG', {
@@ -98,7 +112,6 @@ const formatPrice = (price: number | null) => {
   }).format(price)
 }
 
-// Computed property to filter the live data
 const filteredProducts = computed(() => {
   if (!allProducts.value) return []
   if (activeCategory.value === 'All') {

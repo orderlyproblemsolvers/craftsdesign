@@ -4,7 +4,7 @@
     <div class="relative aspect-3/4 w-full overflow-hidden rounded-xl bg-gray-100 dark:bg-white/5">
       
       <NuxtLink 
-        :to="`/collections/${product.id}`" 
+        :to="productUrl" 
         class="absolute inset-0 z-0"
         :aria-label="`View details for ${product.name}`"
       >
@@ -45,7 +45,7 @@
 
     <div class="space-y-1 flex flex-col flex-1">
       <div class="flex justify-between items-start gap-3">
-        <NuxtLink :to="`/collections/${product.id}`" class="group-hover:text-accent transition-colors line-clamp-1">
+        <NuxtLink :to="productUrl" class="group-hover:text-accent transition-colors line-clamp-1">
           <h3 class="text-lg font-serif font-semibold text-primary dark:text-gray-100">
             {{ product.name }}
           </h3>
@@ -76,11 +76,19 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
+
 const props = defineProps({
   product: {
     type: Object,
     required: true
   }
+})
+
+// --- Computed Routing ---
+// Uses the pre-encoded URL if the parent passed it, otherwise generates it safely here
+const productUrl = computed(() => {
+  return props.product.encodedUrl || `/collections/${encodeURIComponent(props.product.name)}`
 })
 
 // Use the global cart logic

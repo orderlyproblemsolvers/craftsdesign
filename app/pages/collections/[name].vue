@@ -144,13 +144,16 @@ import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const supabase = useSupabaseClient()
-const productId: any = route.params.id
+
+// 1. Get the name from the URL and decode it 
+// (e.g., turns "Bronze%20Sculpture" back to "Bronze Sculpture")
+const routeParamName = route.params.name as string
+const decodedProductName = decodeURIComponent(routeParamName)
 
 // --- 1. Define Helper Functions First ---
 
 /**
  * Formats numbers into Nigerian Naira (NGN) 
- *
  */
 const formatPrice = (price: number | null) => {
   if (price === null) return 'Price on Request'
@@ -170,12 +173,14 @@ const handleWhatsAppInquiry = () => {
 
 // --- 2. Fetch Data ---
 
-// Fetch Main Product using your established Supabase setup
-const { data: product, pending } = await useAsyncData(`product-${productId}`, async () => {
+// Fetch Main Product by NAME instead of ID
+const { data: product, pending } = await useAsyncData(`product-${decodedProductName}`, async () => {
   const { data, error } = await supabase
     .from('products')
     .select('*')
-    .eq('id', productId)
+    // Note: If you run into capitalization issues (e.g., url says 'bronze', DB says 'Bronze'), 
+    // change .eq to .ilike('name', decodedProductName)
+    .eq('name', decodedProductName) 
     .single()
   
   if (error) throw error
@@ -183,19 +188,18 @@ const { data: product, pending } = await useAsyncData(`product-${productId}`, as
 })
 
 // Fetch Related Masterpieces
-const { data: suggestedProducts } = await useAsyncData(`suggested-${productId}`, async () => {
+const { data: suggestedProducts } = await useAsyncData(`suggested-${decodedProductName}`, async () => {
   if (!product.value) return []
   const { data } = await supabase
     .from('products')
     .select('*')
     .eq('category', product.value.category)
-    .neq('id', product.value.id)
+    .neq('name', product.value.name) // Exclude current product by name
     .limit(4)
   return data
 })
 
 // --- 3. SEO & Schema ORG Logic ---
-// Now formatPrice is safely initialized before this runs
 watchEffect(() => {
   if (product.value) {
     const title = `${product.value.name} | Crafts Design Masterpiece`

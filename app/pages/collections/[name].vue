@@ -202,32 +202,41 @@ const { data: suggestedProducts } = await useAsyncData(`suggested-${decodedProdu
 // --- 3. SEO & Schema ORG Logic ---
 watchEffect(() => {
   if (product.value) {
-    const title = `${product.value.name} | Crafts Design Masterpiece`
-    const description = product.value.description.substring(0, 160)
+    const pageTitle = product.value.name
+    const pageDescription = product.value.description.substring(0, 160)
     
+    // 1. Meta Tags
     useSeoMeta({
-      title,
-      ogTitle: title,
-      description,
-      ogDescription: description,
+      title: pageTitle,
+      description: pageDescription,
+      ogTitle: pageTitle,
+      ogDescription: pageDescription,
       ogImage: product.value.image_url,
-      twitterCard: 'summary_large_image',
     })
 
+    // 2. JSON-LD Schema
     useSchemaOrg([
       defineProduct({
         name: product.value.name,
         description: product.value.description,
-        image: [product.value.image_url],
-        offers: [
+        image: product.value.image_url,
+        // Optional: If you have a brand or manufacturer
+        brand: {
+          name: 'Crafts Design'
+        },
+        // Handle offers carefully
+        offers: product.value.price ? [
           { 
-            price: product.value.price || 0, 
+            price: product.value.price, 
             priceCurrency: 'NGN',
-            availability: 'https://schema.org/PreOrder'
+            availability: 'https://schema.org/InStock',
+            url: `https://www.craftsdesign.com${route.path}` 
           }
-        ],
+        ] : undefined, // If no price, don't output an empty offer block
         category: product.value.category
       }),
+      
+      // Beautiful Breadcrumbs for Google Search results
       defineBreadcrumb([
         { name: 'Home', item: '/' },
         { name: 'Collections', item: '/collections' },
@@ -236,9 +245,9 @@ watchEffect(() => {
     ])
 
     defineOgImageComponent('CraftsRadial', {
-      title: product.value.name,
-      description: `${product.value.category} Piece • ${formatPrice(product.value.price)}`
-    })
+  title: product.value.name,
+  description: `${product.value.category} Piece • ${formatPrice(product.value.price)}`
+})
   }
 })
 </script>

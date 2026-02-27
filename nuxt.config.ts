@@ -31,6 +31,7 @@ export default defineNuxtConfig({
     '@nuxtjs/seo',
     '@nuxtjs/supabase',
     '@vueuse/nuxt',
+    'nuxt-schema-org'
   ],
 
   css: ['~/assets/css/main.css'],

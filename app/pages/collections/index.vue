@@ -86,6 +86,14 @@ defineOgImageComponent('CraftsRadial', {
   description: 'Explore our complete menagerie of garden estate sculptures.'
 })
 
+useSchemaOrg([
+  defineWebPage({
+    '@type': 'CollectionPage',
+    name: 'The Master Collection',
+    description: 'Explore our complete menagerie of hand-crafted estate sculptures.'
+  })
+])
+
 // --- 2. Data Fetching & State ---
 const supabase = useSupabaseClient()
 const activeCategory = ref('All')
